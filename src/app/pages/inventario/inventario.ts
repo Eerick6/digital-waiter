@@ -4,19 +4,19 @@ import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'home',
-  templateUrl: './home.html',
-  styleUrls: ['./home.component.scss',
+  templateUrl: './inventario.html',
+  styleUrls: ['./inventario.component.scss',
     './modal-menu.component.scss'
   ],
   standalone: false
 })
 
-export class HomePage implements OnInit {
+export class InventarioPage implements OnInit {
   // Array de cartas (usuarios) para mostrar en las tarjetas
   cartas = [
     {
-      day: 'Lunes',
-      description: 'Comienza la semana con un menú lleno de sabor y energía.',
+      day: 'Arroz',
+      description: 'En stock',
       profileImage: '../../../assets/img/theme/lunes.jpeg',
       hoverImage: '../../../assets/img/theme/lunes2.jpeg',
       showFullDescription: false,
@@ -32,8 +32,8 @@ export class HomePage implements OnInit {
       estado: 'En Stock'
     },
     {
-      day: 'Martes',
-      description: 'Disfruta de un menú refrescante para acompañar tu día.',
+      day: 'Carne',
+      description: 'Por terminarse',
       profileImage: '../../../assets/img/theme/martes.jpeg',
       hoverImage: '../../../assets/img/theme/martes2.jpeg',
       showFullDescription: false,
@@ -49,8 +49,8 @@ export class HomePage implements OnInit {
       estado: 'Agotado'
     },
     {
-      day: 'Miércoles',
-      description: 'Un menú especial para revitalizar tu mitad de semana.',
+      day: 'Pollo',
+      description: 'Agotado',
       profileImage: '../../../assets/img/theme/miercoles.jpeg',
       hoverImage: '../../../assets/img/theme/miercoles2.jpeg',
       showFullDescription: false,

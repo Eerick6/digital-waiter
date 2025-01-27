@@ -10,7 +10,7 @@
 
 <div class="container-home">
   <div class="title">
-    <h1>MENÚ DEL DÍA</h1>
+    <h1>Inventario</h1>
   </div>
 
   <!-- Card de usuarios -->
@@ -39,7 +39,7 @@
      
         <div class="modal-content modal-dialog" *ngIf="selectedCarta">
           <div class="modal-header">
-            <h2 class="modal-title" id="menuModalLabel">Menú del Día - {{ selectedCarta.day }}</h2>
+            <h2 class="modal-title" id="menuModalLabel"> {{ selectedCarta.day }}</h2>
             <p class="card-text">{{ selectedCarta.description }}</p>
             <h3>Precio:</h3>
             <h3 class="card-text">{{ selectedCarta.precio }}</h3>

@@ -25,6 +25,9 @@ import { HomePage }          from './pages/home/home';
 import { UsersComponent } from './pages/users/users.component';
 // Error
 import { ErrorPage }          from './pages/error/error';
+import { MenuPage } from './pages/menu/menu';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { InventarioPage } from './pages/inventario/inventario';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { ErrorPage }          from './pages/error/error';
     
     HomePage,
     UsersComponent,
-    ErrorPage
+    ErrorPage,
+    MenuPage,
+    ProveedoresComponent,
+    InventarioPage
   ],
   imports: [
     AppRoutingModule,

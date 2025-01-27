@@ -15,8 +15,8 @@
     <div class="imgPerson">
       <div class="card-img-top"></div> <!-- Imagen vacía o predeterminada -->
       <div class="card-body">
-        <h2 class="card-title">Nuevo Usuario</h2>
-        <p class="card-text">Agrega un nuevo usuario aquí</p>
+        <h2 class="card-title">Nuevo Proveedor</h2>
+        <p class="card-text">Agrega un nuevo proveedor aquí</p>
         <div class="botones">
           <div class="btn btn-primary" (click)="openModal(null)">Agregar</div> <!-- Botón de agregar -->
         </div>
@@ -30,7 +30,7 @@
       <div class="card-img-top" id="card-img-{{i}}" [ngStyle]="{'background-image': 'url(' + user.profileImage + ')'}"></div>
       <div class="card-body">
         <h2 class="card-title">{{ user.name }}</h2>
-        <p class="card-text">{{ user.Role }}</p>
+        <p class="card-text">{{ user.description }}</p>
         <div class="botones">
           <div class="btn btn-primary" (click)="openModal(user)">Editar</div>
         </div>
@@ -44,7 +44,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addModalLabel">Agregar Nuevo Usuario</h5>
+        <h5 class="modal-title" id="addModalLabel">Agregar Nuevo Proveedor</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
       </div>
       <div class="modal-body">
@@ -54,8 +54,8 @@
           <input type="text" id="userName" class="form-control" [(ngModel)]="selectedUser.name">
         </div>
         <div class="form-group">
-          <label for="userRole">Descripción</label>
-          <textarea id="userRole" class="form-control" [(ngModel)]="selectedUser.Role"></textarea>
+          <label for="userDescription">Descripción</label>
+          <textarea id="userDescription" class="form-control" [(ngModel)]="selectedUser.description"></textarea>
         </div>
       </div>
       <div class="modal-footer">
@@ -80,8 +80,8 @@
           <input type="text" id="userName" class="form-control" [(ngModel)]="selectedUser.name">
         </div>
         <div class="form-group">
-          <label for="userRole">Rol</label>
-          <textarea id="userRole" class="form-control" [(ngModel)]="selectedUser.Role"></textarea>
+          <label for="userDescription">Rol</label>
+          <textarea id="userDescription" class="form-control" [(ngModel)]="selectedUser.description"></textarea>
         </div>
       </div>
       <div class="modal-footer">

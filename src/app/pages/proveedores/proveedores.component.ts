@@ -4,11 +4,11 @@ import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss', '../../../scss/cards/cards.scss'],
+  templateUrl: './proveedores.component.html',
+  styleUrls: ['./proveedor.component.scss', '../../../scss/cards/cards.scss'],
   standalone: false,
 })
-export class UsersComponent implements OnInit {
+export class ProveedoresComponent implements OnInit {
   // Array de usuarios para mostrar en las tarjetas
   users = [
     {

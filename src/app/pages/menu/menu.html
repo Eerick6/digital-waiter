@@ -1,0 +1,71 @@
+<!-- begin breadcrumb -->
+<ol class="breadcrumb float-xl-end">
+  <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
+ 
+</ol>
+<!-- end breadcrumb -->
+<!-- begin page-header -->
+<h1 class="page-header"> Bienvenido</h1>
+<!-- end page-header -->
+
+<div class="container-home">
+  <div class="title">
+    <h1>Ctegorías</h1>
+  </div>
+
+  <!-- Card de usuarios -->
+ <!-- Card de Categorías -->
+<div class="container">
+  <div class="card" *ngFor="let carta of cartas; let i = index" (mouseenter)="onMouseEnter(i)" (mouseleave)="onMouseLeave(i)">
+    <div class="imgPerson">
+      <div class="card-img-top" id="card-img-{{i}}" [ngStyle]="{'background-image': 'url(' + carta.profileImage + ')'}"></div>
+      <div class="card-body">
+        <h2 class="card-title">{{ carta.day }}</h2>
+        <p class="card-text">{{ carta.description }}</p>
+        <div class="botones">
+          <button class="btn btn-primary" (click)="openModal(carta)">
+            Ver Detalles
+          </button>
+          <div class="btn btn-primary" (click)="openModal(carta)">Ver Detalles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal con Tarjetas dentro -->
+<div class="modal fade" id="cardsModal" tabindex="-1" aria-labelledby="cardsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cardsModalLabel">Detalles de Categorías</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Tarjetas dentro del modal -->
+        <div class="container">
+          <div class="card" *ngFor="let carta of cartas; let i = index">
+            <div class="imgPerson">
+              <div class="card-img-top" id="modal-card-img-{{i}}" [ngStyle]="{'background-image': 'url(' + carta.profileImage + ')'}"></div>
+              <div class="card-body">
+                <h2 class="card-title">{{ carta.day }}</h2>
+                <p class="card-text">{{ carta.description }}</p>
+                <div class="botones">
+                  <button class="btn btn-primary" (click)="toggleDescription(i)">
+                    {{ carta.showFullDescription ? 'Ver menos' : 'Ver más' }}
+                  </button>
+                  <div class="btn btn-primary" (click)="editCategory(carta)">Editar</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
