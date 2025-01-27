@@ -1,1 +1,2 @@
-web: npx http-server dist/digital-waiter -p $PORT
+web: node server.js
+
