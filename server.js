@@ -1,24 +1,18 @@
-const express = require("express");
-const path = require("path");
-
+const express = require('express');
+const path = require('path');
 const app = express();
 
-// Ruta a los archivos compilados de Angular en la carpeta "dist"
-const DIST_DIR = path.join(__dirname, "dist");
-const INDEX_FILE = path.join(DIST_DIR, "index.html");
-
-// Middleware para servir archivos estáticos
-app.use(express.static(DIST_DIR));
-
-// Maneja cualquier otra ruta y devuelve `index.html`
-app.get("*", (req, res) => {
-  res.sendFile(INDEX_FILE);
-});
-
-// Puerto predeterminado (puede ser configurado por Railway)
+// Configura el puerto dinámico que Railway requiere.
 const PORT = process.env.PORT || 8080;
 
-// Inicia el servidor
+// Usa express para servir los archivos estáticos generados por Angular
+app.use(express.static(path.join(__dirname, 'dist', 'digital-waiter')));
+
+// Rutas para la SPA
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'digital-waiter', 'index.html'));
+});
+
 app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en el puerto ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
