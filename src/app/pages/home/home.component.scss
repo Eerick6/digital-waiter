@@ -1,30 +1,60 @@
 /* Importar la fuente desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@font-face {
+  font-family: 'Britani';
+  src: url('../../../assets/fonts/BrittanySignature.ttf') format('truetype');
+}
+
 
 /* Estilos para el título "MENÚ DEL DÍA" */
 .title {
-  text-align: center;  /* Centra el texto */
-  margin-top: 40px;    /* Espacio superior para que no esté pegado a otros elementos */
+  text-align: center;
+  margin-top: 40px;
+  font-family: 'Britani', sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;  /* Centra verticalmente los elementos */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  background-color: #3b3939;
+  position: relative;
+  gap: 35px;
+  border-radius: 10px;
 }
+
+
 
 .title h1 {
-  font-family: 'Playwright India', cursive; 
-  font-size: 1.4rem;                       /* Tamaño grande para que sea un título destacado */
-  text-transform: uppercase;             /* Convierte a mayúsculas para un aspecto elegante */
-  letter-spacing: 2px;                   /* Espaciado entre letras */
-  padding: 12px;                         /* Añade espacio alrededor del texto */
-  background-color: #17130c;             /* Fondo naranja que resalta */
-  color: white;                          /* Texto blanco para contraste */
-  border-radius: 10px;                   /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
-  
+  letter-spacing: 15px;
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+
 }
 
-/* Estilo responsive para pantallas más pequeñas */
-@media (max-width: 768px) {
+.title img {
+  height: 150px;
+
+  margin-left: 20px; /* Espacio entre imagen y texto */
+}
+
+@media(max-width: 950px){
   .title h1 {
-    font-size: 2rem;  /* Reduce el tamaño del texto en pantallas pequeñas */
     margin-top: 20px;
+  }
+}
+
+
+
+/* Estilo responsive para pantallas más pequeñas */
+@media (max-width: 450px) {
+  .title h1 {
+    letter-spacing: 5px;
+    
+  font-size: 1rem;
+
+  }
+  .title img {
+    height: 80px;
+    margin: 0;
+   
   }
 }
 
