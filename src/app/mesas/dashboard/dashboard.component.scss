@@ -1,0 +1,161 @@
+.dashboard-card {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .order-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 23%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-card h6 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    background-color: #001733;
+    color: rgb(255, 255, 255);
+    
+  }
+
+  /* Clases dinámicas según el estado */
+.status-enviado-a-cocina {
+    background-color: #ffda23; /* Color para "ENVIADO A COCINA" */
+  }
+  
+  .status-listo-para-despacho {
+    background-color: #35eeff; /* Color para "LISTO PARA DESPACHO" */
+  }
+  
+  .status-entregado {
+    background-color: #ff6cbfd2; /* Color para "ENTREGADO" */
+  }
+
+  .container-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+    margin-top: 100px;
+    gap: 18px;;
+    
+   
+    justify-items: center;
+}
+
+  .card {
+    height:  100px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 120px;
+    transition: 300ms;
+    border-radius: 20px;
+    margin-bottom: 100px;
+    background-color: #f57f31;
+
+}
+
+.imgPerson {
+    height: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 300ms;
+    position: absolute;
+    border-radius: 20px;
+}
+.card-img-top {
+    height: 100px;
+    width: 100%;
+    background-size:contain;
+    transition: 300ms;
+    border-radius: 20px;
+    
+}
+
+.card-body {
+    height: auto;
+    width: 100%;
+    background-color: #D3D3D3;
+    position: absolute;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius:20px ;
+    margin-top: 150px;
+    display: grid;
+    grid-template-rows: 1fr, 1fr, 1fr;
+    place-items: center;
+}
+
+.card-text {
+    display: -webkit-box;          /* Utiliza el modelo de caja de Webkit */
+    -webkit-box-orient: vertical; /* Orienta el contenido de forma vertical */
+    overflow: hidden;             /* Oculta el contenido desbordante */
+  }
+  
+  .card-text.truncated {
+    -webkit-line-clamp: 1; /* Limita a 3 líneas */
+    line-clamp: 1;
+  }
+
+  .botones {
+    display:  flex;
+    gap: 10px;
+  }
+
+.btn {
+    background-color: #f57f31;
+    border-color: #000;
+    margin: auto;
+    cursor: pointer;
+}
+
+/*hover*/
+.card:hover {
+    transform: scale(1.1);
+    transition: 500ms;
+}
+
+.card:hover .card-img-top {
+    transition: 500ms;
+    
+}
+
+.card:hover .imgPerson {
+    background-color: #ed6d18;
+    border-radius: 20px;
+    transition: 50ms;
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.notificaciones {
+    margin-top: 40px;
+    padding: 20px;
+    
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+  
+}
+
+.title-recordatorio {
+    background-color: #001733;
+    width: 100%;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+}

@@ -1,18 +1,29 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import * as bootstrap from 'bootstrap';
+
+interface Order {
+  id: number;
+  table: number;
+  client: string;
+  status: string;
+  mensaje: string
+}
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.html',
-  styleUrls: ['./home.component.scss',
-    './modal-menu.component.scss'
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'
   ],
-  standalone: false
+  standalone:false
 })
+export class DashboardComponent implements OnInit  {
+  orders: Order[] = [
+    { id: 220, table: 15, client: 'Juan Soto', status: 'ENVIADO A COCINA',mensaje: 'Traer jugos extras' },
+    { id: 230, table: 12, client: 'Juan Soto', status: 'LISTO PARA DESPACHO', mensaje: 'Traer jugos extras' },
+    { id: 240, table: 8, client: 'Juan Sot', status: 'ENTREGADO', mensaje: 'Traer jugos extras' },
+    { id: 222, table: 1, client: 'Juan Soto', status: 'ENVIADO A COCINA', mensaje: 'Traer jugos extras' }
+  ];
 
-export class HomePage implements OnInit {
-  // Array de cartas (usuarios) para mostrar en las tarjetas
   cartas = [
     {
       day: 'Lunes',
@@ -133,15 +144,13 @@ export class HomePage implements OnInit {
       precio: '$3,50',
     },
   ];
+  
 
-  selectedCarta: any = {}; // Carta seleccionada para edición o visualización
-
-  @ViewChild('viewModal') modalRef: ElementRef;
-  @ViewChild('editModal') viewModalRef: ElementRef; // Ref para el modal de ver
 
   constructor(private cdRef: ChangeDetectorRef) {}
-
   ngOnInit(): void {}
+  selectedCarta: any = {};
+
 
   // Función para cambiar la imagen de la tarjeta cuando el mouse entra
   onMouseEnter(i: number): void {
@@ -155,31 +164,16 @@ export class HomePage implements OnInit {
     cardImage.style.backgroundImage = `url(${this.cartas[i].profileImage})`;
   }
 
-  
-
-  // Abrir el modal de edición y asignar la carta seleccionada
-  openViewModal(carta: any): void {
-    this.selectedCarta = { ...carta }; // Hacemos una copia de la carta para no modificar el original
-    const modal = new bootstrap.Modal(this.modalRef.nativeElement);
-    modal.show();
-  }
-
-  // Cerrar el modal de edición
-  closeViewModal(): void {
-    const modal = bootstrap.Modal.getInstance(this.modalRef.nativeElement);
-    modal.hide();
-  }
-
-  // Función para abrir el modal de ver detalles
-  openModal(carta: any): void {
-    this.selectedCarta = { ...carta }; // Asignamos la carta seleccionada
-    const modal = new bootstrap.Modal(this.viewModalRef.nativeElement);
-    modal.show();
-  }
-
-  // Función para cerrar el modal de ver detalles
-  closeModal(): void {
-    const modal = bootstrap.Modal.getInstance(this.viewModalRef.nativeElement);
-    modal.hide();
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'ENVIADO A COCINA':
+        return 'status-enviado-a-cocina';
+      case 'LISTO PARA DESPACHO':
+        return 'status-listo-para-despacho';
+      case 'ENTREGADO':
+        return 'status-entregado';
+      default:
+        return ''; // Clase por defecto (opcional)
+    }
   }
 }

@@ -30,6 +30,23 @@ export class AppMenuService {
         'icon': 'fa fa-cogs', // Icono alternativo para Gestión de Menús
         'title': 'Inventarios',
         'url': '/inventarios'
+      },
+      {
+        'icon': 'fa fa-cogs', // Icono alternativo para Gestión de Menús
+        'title': 'Dashboard',
+        'url': '/dashboard'
+      }
+      ,
+      {
+        'icon': 'fa fa-cogs', // Icono alternativo para Gestión de Menús
+        'title': 'Gestión de mesas',
+        'url': '/mesas'
+      }
+      ,
+      {
+        'icon': 'fa fa-cogs', // Icono alternativo para Gestión de Menús
+        'title': 'Ordenes',
+        'url': '/ordenes'
       }];
   }
 }

@@ -1,0 +1,70 @@
+<!-- Lista de Órdenes -->
+<div class="title">
+    <h2>
+        Órdenes
+    </h2>
+    <button></button>
+</div>
+<div class="dashboard-card">
+    <div *ngFor="let order of orders" 
+         class="order-card" 
+         [ngClass]="getStatusClass(order.status)"
+         style="cursor: pointer;">
+        
+        <div class="info">
+            <h6>Estado: {{ order.status }}</h6>
+            <p>Orden: {{ order.id }}</p>
+            <p>Mesa: {{ order.table }}</p>
+            <p>Cliente: {{ order.client }}</p>
+            <p>Mensaje: {{ order.mensaje }}</p>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" (click)="openEditModal(order)">Editar</button>
+            <button class="btn btn-danger" (click)="openDeleteModal(order)">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Editar Orden -->
+<div class="modal fade" tabindex="-1" #editModal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h2>Editar Orden</h2>
+            <label>Mesa:</label>
+            <input type="number" [(ngModel)]="selectedOrder.table">
+            
+            <label>Cliente:</label>
+            <input type="text" [(ngModel)]="selectedOrder.client">
+            
+            <label>Estado:</label>
+            <select [(ngModel)]="selectedOrder.status">
+                <option>ENVIADO A COCINA</option>
+                <option>LISTO PARA DESPACHO</option>
+                <option>ENTREGADO</option>
+            </select>
+
+            <label>Mensaje:</label>
+            <input type="text" [(ngModel)]="selectedOrder.mensaje">
+
+            <div class="modal-buttons">
+                <button class="btn btn-success" (click)="updateOrder()">Guardar</button>
+                <button class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Confirmar Eliminación -->
+<div class="modal fade" tabindex="-1" #deleteModal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h2>Eliminar Orden</h2>
+            <p>¿Estás seguro de que deseas eliminar la orden de la mesa {{ selectedOrder?.table }}?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-danger" (click)="deleteOrder()">Eliminar</button>
+                <button class="btn btn-secondary" (click)="closeDeleteModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

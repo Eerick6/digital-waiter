@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
     {
       name: 'Goku',
       description: 'Proveedor de ingredientes y herramientas de cocina.',
-      profileImage: '../../../assets/img/theme/goku.png',
+      profileImage: '../../.f./assets/img/theme/goku.png',
       hoverImage: '../../../assets/img/theme/goku2.png',
       showFullDescription: false,
       Role: 'Cocina'
@@ -38,10 +38,12 @@ export class UsersComponent implements OnInit {
 
   // Variable para almacenar el usuario seleccionado para edición o nuevo usuario
   selectedUser: any = {};
+  isEditMode: boolean = false;
 
   // Referencia al modal
   @ViewChild('addModal') addModalRef: ElementRef;
   @ViewChild('editModal') editModalRef: ElementRef;
+  @ViewChild('deleteModal') deleteModalRef: ElementRef;
 
   constructor(private cdRef: ChangeDetectorRef) {}
 
@@ -63,11 +65,13 @@ export class UsersComponent implements OnInit {
   openModal(user: any): void {
     if (user) {
       // Editar usuario
+      this.isEditMode = true;
       this.selectedUser = { ...user };
       const modal = new bootstrap.Modal(this.editModalRef.nativeElement);
       modal.show();
     } else {
       // Agregar nuevo usuario
+      this.isEditMode = false;
       this.selectedUser = {
         name: '',
         description: '',
@@ -110,4 +114,52 @@ export class UsersComponent implements OnInit {
       alert('Debe completar todos los campos.');
     }
   }
+
+  // Función para confirmar la eliminación de un usuario
+  confirmDelete(user: any): void {
+    this.selectedUser = user;
+    const modal = new bootstrap.Modal(this.deleteModalRef.nativeElement);
+    modal.show();
+  }
+
+  // Función para eliminar un usuario
+  deleteUser(): void {
+    const index = this.users.findIndex(u => u.name === this.selectedUser.name);
+    if (index !== -1) {
+      this.users.splice(index, 1);
+      this.cdRef.detectChanges();
+    }
+    this.closeDeleteModal();
+  }
+
+  // Función para cerrar el modal de eliminación
+  closeDeleteModal(): void {
+    const modal = bootstrap.Modal.getInstance(this.deleteModalRef.nativeElement);
+    if (modal) {
+      modal.hide();
+    }
+  }
+
+  onProfileImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedUser.profileImage = reader.result as string; // Usar el resultado como URL de la imagen
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  
+  onHoverImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedUser.hoverImage = reader.result as string; // Usar el resultado como URL de la imagen
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  
 }

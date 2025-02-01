@@ -1,213 +1,141 @@
-<!-- begin breadcrumb -->
-<ol class="breadcrumb float-xl-end">
-  <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
- 
-</ol>
-<!-- end breadcrumb -->
-<!-- begin page-header -->
-<h1 class="page-header"> Bienvenido</h1>
-<!-- end page-header -->
+<div id="app" class="app">
 
-<div class="container-home">
-  <div class="title">
-    <h1>Inventario</h1>
-  </div>
 
-  <!-- Card de usuarios -->
-  <div class="container">
-    <div class="card" *ngFor="let carta of cartas; let i = index" (mouseenter)="onMouseEnter(i)" (mouseleave)="onMouseLeave(i)">
-      <div class="imgPerson">
-        <div class="card-img-top" id="card-img-{{i}}" [ngStyle]="{'background-image': 'url(' + carta.profileImage + ')'}"></div>
-        <div class="card-body">
-          <h2 class="card-title">{{ carta.day }}</h2>
-          <p class="card-text">{{ carta.description }}</p>
-          <div class="botones">
-            <button class="btn btn-primary" (click)="openModal(carta)">
-              Ver
+  <!-- BEGIN #content -->
+  <div  class="content">
+    <div class="d-flex align-items-center mb-3">
+      <div>
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:;">Productos</a></li>
+          <li class="breadcrumb-item active">Productos</li>
+        </ol>
+        <h1 class="page-header mb-0">Productos</h1>
+      </div>
+      <div class="ms-auto">
+        <a href="#" class="btn btn-success btn-rounded px-4 rounded-pill">
+          <i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Agregar
+        </a>
+      </div>
+    </div>
+
+    <!-- Filtros y acciones -->
+    <div class="mb-3 d-sm-flex fw-bold">
+      <div class="mt-sm-0 mt-2">
+        <a href="#" class="text-dark text-decoration-none">
+          <i class="fa fa-download fa-fw me-1 text-dark text-opacity-50"></i> Exportar
+        </a>
+      </div>
+      <div class="ms-sm-4 ps-sm-1 mt-sm-0 mt-2">
+        <a href="#" class="text-dark text-decoration-none">
+          <i class="fa fa-upload fa-fw me-1 text-dark text-opacity-50"></i> Importar
+        </a>
+      </div>
+      <div class="ms-sm-4 ps-sm-1 mt-sm-0 mt-2 dropdown-toggle">
+        <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">
+          <i class="fa fa-cog fa-fw me-1 text-dark text-opacity-50"></i> Más acciones <b class="caret"></b>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div role="separator" class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de productos -->
+    <div class="card border-0">
+      <ul class="nav nav-tabs nav-tabs-v2 px-3">
+        <li class="nav-item me-2">
+          <a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">All</a>
+        </li>
+        <li class="nav-item me-2">
+          <a href="#publishedTab" class="nav-link px-2" data-bs-toggle="tab">Published</a>
+        </li>
+        <li class="nav-item me-2">
+          <a href="#expiredTab" class="nav-link px-2" data-bs-toggle="tab">Expired</a>
+        </li>
+        <li class="nav-item me-2">
+          <a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Deleted</a>
+        </li>
+      </ul>
+      <div class="tab-content p-3">
+        <div class="tab-pane fade show active" id="allTab">
+          <!-- Filtros y búsqueda -->
+          <div class="input-group mb-3">
+            <button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              Filtrar productos <b class="caret"></b>
             </button>
-            <div class="btn btn-primary" (click)="openModal(carta)">Editar</div>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+            <input type="text" class="form-control" placeholder="Search products..." />
+          </div>
+
+          <!-- Tabla de productos -->
+          <div class="table-responsive">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th class="pt-0 pb-2"></th>
+                  <th class="pt-0 pb-2">Producto</th>
+                  <th class="pt-0 pb-2">Cantidad</th>
+                  <th class="pt-0 pb-2">Tipo</th>
+                  <th class="pt-0 pb-2">Proveedor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of paginatedProducts">
+                  <td class="w-10px align-middle">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" [id]="'product' + product.id">
+                      <label class="form-check-label" [for]="'product' + product.id"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="w-50px h-50px bg-light d-flex align-items-center justify-content-center">
+                        <img [src]="product.image" alt="" class="mw-100 mh-100" />
+                      </div>
+                      <div class="ms-3">
+                        <a href="#" class="text-dark text-decoration-none">{{ product.name }}</a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="align-middle">{{ product.inventory }}</td>
+                  <td class="align-middle">{{ product.type }}</td>
+                  <td class="align-middle">{{ product.vendor }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Paginación -->
+          <div class="d-md-flex align-items-center">
+            <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
+              Mostrando {{ (currentPage - 1) * itemsPerPage + 1 }} a {{ currentPage * itemsPerPage }} de {{ totalItems }} productos
+            </div>
+            <ul class="pagination mb-0 justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="currentPage === i + 1">
+                <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </div> 
+  </div>
+  <!-- END #content -->
 </div>
-
-<!-- Modal para el Menú del Día -->
-
-    <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true" #editModal>
-     
-        <div class="modal-content modal-dialog" *ngIf="selectedCarta">
-          <div class="modal-header">
-            <h2 class="modal-title" id="menuModalLabel"> {{ selectedCarta.day }}</h2>
-            <p class="card-text">{{ selectedCarta.description }}</p>
-            <h3>Precio:</h3>
-            <h3 class="card-text">{{ selectedCarta.precio }}</h3>
-            <div class="d-flex justify-content-between">
-            <div>Estado: <span>{{ selectedCarta.estado }}</span></div>
-              
-            </div>
-  
-          </div>
-          <div class="modal-body">
-            <!-- Sopas -->
-            <div class="section">
-              <h6>Sopas</h6>
-              <div class="d-flex justify-content-between">
-                <div>Opción 1: <span>{{ selectedCarta.sopa }}</span></div>
-                
-              </div>
-              <div class="d-flex justify-content-between mt-2">
-                <div>Opción 2: <span>{{ selectedCarta.sopa2 }}</span></div>
-                
-              </div>
-            </div>
-            <hr>
-            <!-- Plato Fuerte -->
-            <div class="section">
-              <h6>Plato Fuerte</h6>
-              <div class="d-flex justify-content-between">
-                <div>Opción : <span>{{ selectedCarta.platoFuerte }}</span></div>
-                
-              </div>
-              <div class="d-flex justify-content-between mt-2">
-                <div>Opción 2: <span>{{ selectedCarta.platoFuerte2 }}</span></div>
-                
-              </div>
-            </div>
-            <hr>
-            <!-- Jugos -->
-            <div class="section">
-              <h6>Jugos</h6>
-              <div class="d-flex justify-content-between">
-                <div>Opción 1: <span>{{ selectedCarta.jugo }}</span></div>
-                
-              </div>
-              <div class="d-flex justify-content-between mt-2">
-                <div>Opción 2: <span>{{ selectedCarta.jugo2 }}</span></div>
-                
-              </div>
-            </div>
-            <hr>
-            <!-- Postres -->
-            <div class="section">
-              <h6>Postres</h6>
-              <div class="d-flex justify-content-between">
-                <div>Opción 1: <span>{{ selectedCarta.postre }}</span></div>
-                
-              </div>
-              <div class="d-flex justify-content-between mt-2">
-                <div>Opción 2: <span>{{ selectedCarta.postre2 }}</span></div>
-                
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar cambios</button>
-          </div>
-        </div>
-      
-    </div>
-
-    <div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="editMenuModalLabel">Editar Menú del Día</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- Formulario para Editar Menú -->
-            <div class="mb-3">
-              <label for="editDay" class="form-label">Día</label>
-              <input type="text" class="form-control" id="editDay" [(ngModel)]="selectedCarta.day">
-            </div>
-    
-            <div class="mb-3">
-              <label for="editDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" id="editDescription" rows="3" [(ngModel)]="selectedCarta.description"></textarea>
-            </div>
-    
-            <div class="mb-3">
-              <label for="editPrecio" class="form-label">Precio</label>
-              <input type="text" class="form-control" id="editPrecio" [(ngModel)]="selectedCarta.precio">
-            </div>
-    
-            <div class="mb-3">
-              <label for="editEstado" class="form-label">Estado</label>
-              <select class="form-select" id="editEstado" [(ngModel)]="selectedCarta.estado">
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Sopas -->
-            <div class="section">
-              <h6>Sopas</h6>
-              <div class="mb-3">
-                <label for="editSopa1" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editSopa1" [(ngModel)]="selectedCarta.sopa">
-              </div>
-              <div class="mb-3">
-                <label for="editSopa2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editSopa2" [(ngModel)]="selectedCarta.sopa2">
-              </div>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Plato Fuerte -->
-            <div class="section">
-              <h6>Plato Fuerte</h6>
-              <div class="mb-3">
-                <label for="editPlatoFuerte" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editPlatoFuerte" [(ngModel)]="selectedCarta.platoFuerte">
-              </div>
-              <div class="mb-3">
-                <label for="editPlatoFuerte2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editPlatoFuerte2" [(ngModel)]="selectedCarta.platoFuerte2">
-              </div>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Jugos -->
-            <div class="section">
-              <h6>Jugos</h6>
-              <div class="mb-3">
-                <label for="editJugo1" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editJugo1" [(ngModel)]="selectedCarta.jugo">
-              </div>
-              <div class="mb-3">
-                <label for="editJugo2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editJugo2" [(ngModel)]="selectedCarta.jugo2">
-              </div>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Postres -->
-            <div class="section">
-              <h6>Postres</h6>
-              <div class="mb-3">
-                <label for="editPostre1" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editPostre1" [(ngModel)]="selectedCarta.postre">
-              </div>
-              <div class="mb-3">
-                <label for="editPostre2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editPostre2" [(ngModel)]="selectedCarta.postre2">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)="saveChanges()">Guardar Cambios</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-

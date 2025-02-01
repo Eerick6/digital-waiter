@@ -14,7 +14,7 @@
     <h1>Digital Waiter</h1>
   </div>
 
-  <!-- Card de usuarios -->
+  <!-- Card de cartass -->
   <div class="container">
     <div class="card" *ngFor="let carta of cartas; let i = index" (mouseenter)="onMouseEnter(i)" (mouseleave)="onMouseLeave(i)">
       <div class="imgPerson">
@@ -23,10 +23,12 @@
           <h2 class="card-title">{{ carta.day }}</h2>
           <p class="card-text">{{ carta.description }}</p>
           <div class="botones">
-            <button class="btn btn-primary" (click)="openModal(carta)">
+            <button class="btn btn-primary" (click)="openViewModal(carta)">
               Ver
             </button>
-            <div class="btn btn-primary" (click)="openModal(carta)">Editar</div>
+            <button class="btn btn-primary" (click)="openModal(carta)">
+              Editar
+            </button>
           </div>
         </div>
       </div>
@@ -36,7 +38,7 @@
 
 <!-- Modal para el Menú del Día -->
 
-    <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true" #editModal>
+    <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true" #viewModal>
      
         <div class="modal-content modal-dialog" *ngIf="selectedCarta">
           <div class="modal-header">
@@ -105,110 +107,70 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar cambios</button>
           </div>
         </div>
       
     </div>
 
-    <div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="editMenuModalLabel">Editar Menú del Día</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- Formulario para Editar Menú -->
-            <div class="mb-3">
-              <label for="editDay" class="form-label">Día</label>
-              <input type="text" class="form-control" id="editDay" [(ngModel)]="selectedCarta.day">
-            </div>
-    
-            <div class="mb-3">
-              <label for="editDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" id="editDescription" rows="3" [(ngModel)]="selectedCarta.description"></textarea>
-            </div>
-    
-            <div class="mb-3">
-              <label for="editPrecio" class="form-label">Precio</label>
-              <input type="text" class="form-control" id="editPrecio" [(ngModel)]="selectedCarta.precio">
-            </div>
-    
-            <div class="mb-3">
-              <label for="editEstado" class="form-label">Estado</label>
-              <select class="form-select" id="editEstado" [(ngModel)]="selectedCarta.estado">
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Sopas -->
-            <div class="section">
-              <h6>Sopas</h6>
-              <div class="mb-3">
-                <label for="editSopa1" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editSopa1" [(ngModel)]="selectedCarta.sopa">
-              </div>
-              <div class="mb-3">
-                <label for="editSopa2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editSopa2" [(ngModel)]="selectedCarta.sopa2">
-              </div>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Plato Fuerte -->
-            <div class="section">
-              <h6>Plato Fuerte</h6>
-              <div class="mb-3">
-                <label for="editPlatoFuerte" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editPlatoFuerte" [(ngModel)]="selectedCarta.platoFuerte">
-              </div>
-              <div class="mb-3">
-                <label for="editPlatoFuerte2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editPlatoFuerte2" [(ngModel)]="selectedCarta.platoFuerte2">
-              </div>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Jugos -->
-            <div class="section">
-              <h6>Jugos</h6>
-              <div class="mb-3">
-                <label for="editJugo1" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editJugo1" [(ngModel)]="selectedCarta.jugo">
-              </div>
-              <div class="mb-3">
-                <label for="editJugo2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editJugo2" [(ngModel)]="selectedCarta.jugo2">
-              </div>
-            </div>
-    
-            <hr>
-    
-            <!-- Editar Postres -->
-            <div class="section">
-              <h6>Postres</h6>
-              <div class="mb-3">
-                <label for="editPostre1" class="form-label">Opción 1</label>
-                <input type="text" class="form-control" id="editPostre1" [(ngModel)]="selectedCarta.postre">
-              </div>
-              <div class="mb-3">
-                <label for="editPostre2" class="form-label">Opción 2</label>
-                <input type="text" class="form-control" id="editPostre2" [(ngModel)]="selectedCarta.postre2">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)="saveChanges()">Guardar Cambios</button>
-          </div>
+  <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true" #editModal>
+  <div class="modal-content modal-dialog" *ngIf="selectedCarta">
+    <div class="modal-header">
+      <h2 class="modal-title" id="menuModalLabel">Menú del Día - 
+        <input type="text" [(ngModel)]="selectedCarta.day" class="form-control">
+      </h2>
+      <textarea [(ngModel)]="selectedCarta.description" class="form-control"></textarea>
+      <h3>Precio:</h3>
+      <input type="number" [(ngModel)]="selectedCarta.precio" class="form-control">
+      <div class="d-flex justify-content-between">
+        <div>Estado: 
+          <select [(ngModel)]="selectedCarta.estado" class="form-control">
+            <option value="Activo">En existencia</option>
+            <option value="Inactivo">Agotado</option>
+          </select>
         </div>
       </div>
     </div>
 
+    <div class="modal-body">
+      <!-- Sopas -->
+      <div class="section">
+        <h6>Sopas</h6>
+        <input type="text" [(ngModel)]="selectedCarta.sopa" class="form-control">
+        <input type="text" [(ngModel)]="selectedCarta.sopa2" class="form-control mt-2">
+      </div>
+      <hr>
+
+      <!-- Plato Fuerte -->
+      <div class="section">
+        <h6>Plato Fuerte</h6>
+        <input type="text" [(ngModel)]="selectedCarta.platoFuerte" class="form-control">
+        <input type="text" [(ngModel)]="selectedCarta.platoFuerte2" class="form-control mt-2">
+      </div>
+      <hr>
+
+      <!-- Jugos -->
+      <div class="section">
+        <h6>Jugos</h6>
+        <input type="text" [(ngModel)]="selectedCarta.jugo" class="form-control">
+        <input type="text" [(ngModel)]="selectedCarta.jugo2" class="form-control mt-2">
+      </div>
+      <hr>
+
+      <!-- Postres -->
+      <div class="section">
+        <h6>Postres</h6>
+        <input type="text" [(ngModel)]="selectedCarta.postre" class="form-control">
+        <input type="text" [(ngModel)]="selectedCarta.postre2" class="form-control mt-2">
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+
+  
 

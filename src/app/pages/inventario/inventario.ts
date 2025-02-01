@@ -1,196 +1,54 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
-import * as bootstrap from 'bootstrap';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'home',
+  selector: 'app-inventario',
   templateUrl: './inventario.html',
-  styleUrls: ['./inventario.component.scss',
-    './modal-menu.component.scss'
-  ],
+  styleUrls: ['./inventario.component.scss'],
   standalone: false
 })
-
 export class InventarioPage implements OnInit {
-  // Array de cartas (usuarios) para mostrar en las tarjetas
-  cartas = [
-    {
-      day: 'Arroz',
-      description: 'En stock',
-      profileImage: '../../../assets/img/theme/lunes.jpeg',
-      hoverImage: '../../../assets/img/theme/lunes2.jpeg',
-      showFullDescription: false,
-      sopa: 'Caldo de gallina',
-      sopa2: 'Crema de zapallo',
-      platoFuerte: 'Seco de pollo',
-      platoFuerte2: 'Arroz con carne asada',
-      postre: 'Gelatina',
-      postre2: 'Flan',
-      jugo: 'Jugo de naranja',
-      jugo2: 'Jugo de mora',
-      precio: '$3,50',
-      estado: 'En Stock'
-    },
-    {
-      day: 'Carne',
-      description: 'Por terminarse',
-      profileImage: '../../../assets/img/theme/martes.jpeg',
-      hoverImage: '../../../assets/img/theme/martes2.jpeg',
-      showFullDescription: false,
-      sopa: 'Sopa de lentejas',
-      sopa2: 'Crema de espárragos',
-      platoFuerte: 'Lasaña de carne',
-      platoFuerte2: 'Encebollado',
-      postre: 'Torta de chocolate',
-      postre2: 'Mousse de maracuyá',
-      jugo: 'Jugo de sandía',
-      jugo2: 'Limonada',
-      precio: '$3,50',
-      estado: 'Agotado'
-    },
-    {
-      day: 'Pollo',
-      description: 'Agotado',
-      profileImage: '../../../assets/img/theme/miercoles.jpeg',
-      hoverImage: '../../../assets/img/theme/miercoles2.jpeg',
-      showFullDescription: false,
-      sopa: 'Sopa de choclo',
-      sopa2: 'Consomé de pollo',
-      platoFuerte: 'Filete de pescado al vapor',
-      platoFuerte2: 'Cazuela de mariscos',
-      postre: 'Helado',
-      postre2: 'Arroz con leche',
-      jugo: 'Jugo de tamarindo',
-      jugo2: 'Jugo de piña',
-      precio: '$3,50',
-      estado: 'En Stock'
-    },
-    {
-      day: 'Jueves',
-      description: 'Sabe el fin de semana con sabores intensos y frescos.',
-      profileImage: '../../../assets/img/theme/jueves.jpeg',
-      hoverImage: '../../../assets/img/theme/jueves2.jpeg',
-      showFullDescription: false,
-      sopa: 'Locro de papa',
-      sopa2: 'Caldo de pescado',
-      platoFuerte: 'Chuleta de cerdo con arroz',
-      platoFuerte2: 'Tallarines al pesto',
-      postre: 'Cheesecake de frutos rojos',
-      postre2: 'Tres leches',
-      jugo: 'Jugo de guayaba',
-      jugo2: 'Jugo de durazno',
-      precio: '$3,50',
-      estado: 'En Stock'
-    },
-    {
-      day: 'Viernes',
-      description: 'Celebra el viernes con un menú lleno de delicias.',
-      profileImage: '../../../assets/img/theme/viernes.jpeg',
-      hoverImage: '../../../assets/img/theme/viernes2.jpeg',
-      showFullDescription: false,
-      sopa: 'Sancocho',
-      sopa2: 'Sopa de frijoles',
-      platoFuerte: 'Fritada con mote',
-      platoFuerte2: 'Pollo al horno',
-      postre: 'Volcán de chocolate',
-      postre2: 'Tiramisú',
-      jugo: 'Jugo de melón',
-      jugo2: 'Jugo de mandarina',
-      precio: '$3,50',
-      estado: 'En Stock'
-    },
-    {
-      day: 'Sábado',
-      description: 'El sabor del fin de semana, perfecto para compartir.',
-      profileImage: '../../../assets/img/theme/sabado.jpeg',
-      hoverImage: '../../../assets/img/theme/sabado2.jpeg',
-      showFullDescription: false,
-      sopa: 'Sopa marinera',
-      sopa2: 'Consomé de res',
-      platoFuerte: 'Arroz con camarones',
-      platoFuerte2: 'Ceviche mixto',
-      postre: 'Brownies',
-      postre2: 'Pionono',
-      jugo: 'Jugo de uva',
-      jugo2: 'Jugo de limón con hierbabuena',
-      precio: '$3,50',
-      estado: 'Agotado'
-    },
-    {
-      day: 'Domingo',
-      description: 'Relájate y disfruta con un menú dominical lleno de sabor.',
-      profileImage: '../../../assets/img/theme/domingo.jpeg',
-      hoverImage: '../../../assets/img/theme/domingo2.jpeg',
-      showFullDescription: false,
-      sopa: 'Caldo de bolas',
-      sopa2: 'Sopa de queso',
-      platoFuerte: 'Hornado',
-      platoFuerte2: 'Seco de chivo',
-      postre: 'Pan de banano',
-      postre2: 'Bizcocho casero',
-      jugo: 'Morocho (bebida)',
-      jugo2: 'Jugo de papaya',
-      precio: '$3,50',
-    },
-  ];
+  products = []; // Array de productos
+  currentPage = 1; // Página actual
+  itemsPerPage = 10; // Cantidad de productos por página
+  totalItems = 0; // Número total de productos
+  totalPages = 0; // Número total de páginas
+  paginatedProducts = []; // Productos de la página actual
 
-  selectedCarta: any = {}; // Carta seleccionada para edición
+  constructor() {}
 
-  @ViewChild('editModal') modalRef: ElementRef;
-
-  constructor(private cdRef: ChangeDetectorRef) {}
-
-  ngOnInit(): void {}
-
-  // Función para cambiar la imagen de la tarjeta cuando el mouse entra
-  onMouseEnter(i: number): void {
-    const cardImage = document.querySelector(`#card-img-${i}`) as HTMLElement;
-    cardImage.style.backgroundImage = `url(${this.cartas[i].hoverImage})`;
+  ngOnInit(): void {
+    this.loadProducts();
   }
 
-  // Función para restaurar la imagen cuando el mouse sale
-  onMouseLeave(i: number): void {
-    const cardImage = document.querySelector(`#card-img-${i}`) as HTMLElement;
-    cardImage.style.backgroundImage = `url(${this.cartas[i].profileImage})`;
+  // Simulación de carga de productos
+  loadProducts() {
+    // Supón que estos son los productos obtenidos desde una API
+    this.products = [
+      { id: 1, name: 'Arroz Rico', inventory: 10, type: 'Carbohidratos', vendor: 'Juan Pérez', image: 'https://elahorro.com.ec/web/image/product.template/88640/image' },
+      { id: 2, name: 'Pollo', inventory: 5, type: 'Proteína', vendor: 'Pedro ', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRMjpHOuza_FmQGEChqH90Cmp5JR9ZHtBMUA&s' },
+      // Agrega más productos
+    ];
+    this.totalItems = this.products.length;
+    this.calculateTotalPages();
+    this.paginateProducts();
   }
 
-  // Función para alternar la descripción larga del usuario
-  toggleDescription(i: number): void {
-    this.cartas[i].showFullDescription = !this.cartas[i].showFullDescription;
+  // Calcular el número total de páginas
+  calculateTotalPages(): void {
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
-  // Abrir el modal y asignar la carta seleccionada
-  openModal(carta: any): void {
-    this.selectedCarta = { ...carta }; // Hacemos una copia de la carta para no modificar el original
-    const modal = new bootstrap.Modal(this.modalRef.nativeElement);
-    modal.show();
+  // Actualizar los productos mostrados según la página actual
+  paginateProducts(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    this.paginatedProducts = this.products.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
-  // Cerrar el modal
-  closeModal(): void {
-    const modal = bootstrap.Modal.getInstance(this.modalRef.nativeElement);
-    modal.hide();
-  }
-
-  // Función para actualizar la carta (visualmente y dentro del array)
-  updateUser(): void {
-    const index = this.cartas.findIndex(carta => carta.day === this.selectedCarta.day);
-    if (index !== -1) {
-      this.cartas[index] = { ...this.selectedCarta }; // Actualizamos los datos de la carta seleccionada
+  // Cambiar la página
+  onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginateProducts();
     }
-    this.cdRef.detectChanges(); // Forzar la detección de cambios para reflejar los cambios en la vista
-
-    this.closeModal(); // Cerrar el modal después de guardar
-  }
-
-  // Función para guardar los cambios realizados
-  saveChanges(): void {
-    const index = this.cartas.findIndex(carta => carta.day === this.selectedCarta.day);
-    if (index !== -1) {
-      this.cartas[index] = { ...this.selectedCarta }; // Actualizamos los datos de la carta seleccionada
-    }
-    this.cdRef.detectChanges(); // Forzar la detección de cambios
-
-    this.closeModal(); // Cerrar el modal
   }
 }

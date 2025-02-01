@@ -1,0 +1,48 @@
+<div class="dashboard-card">
+    <div *ngFor="let order of orders" class="order-card" [ngClass]="getStatusClass(order.status)">
+        <h6>Estado: {{ order.status }}</h6>
+        <p>Orden: {{ order.id }}</p>
+        <p>Mesa: {{ order.table }}</p>
+        <p>Cliente: {{ order.client }}</p>
+        
+    </div>
+</div>
+
+<div class="dashboard-container">
+    <div class="container-menu">
+
+        <div class="card" 
+             *ngFor="let carta of cartas; let i = index" 
+             (mouseenter)="onMouseEnter(i)" 
+             (mouseleave)="onMouseLeave(i)"
+             (click)="openViewModal(carta)"
+             style="cursor: pointer;">
+            <div class="imgPerson">
+                <div class="card-img-top" id="card-img-{{i}}" 
+                     [ngStyle]="{'background-image': 'url(' + carta.profileImage + ')'}">
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">{{ carta.day }}</h2>
+                    <div class="botones">
+                        <!-- Botones adicionales si los necesitas -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="notificaciones">
+        <div class="title-recordatorio">
+            <h3>Recordatorios</h3>
+
+        </div>
+        <div class="dashboard-card">
+            <div *ngFor="let order of orders" class="order-card" [ngClass]="getStatusClass(order.status)">
+                <p>Orden: {{ order.id }}</p>
+                <p>Cliente: {{ order.mensaje }}</p>
+                
+                
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -28,6 +28,11 @@ import { ErrorPage }          from './pages/error/error';
 import { MenuPage } from './pages/menu/menu';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { InventarioPage } from './pages/inventario/inventario';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { DashboardComponent } from './mesas/dashboard/dashboard.component';
+import { GestionComponent } from './mesas/gestion/gestion.component';
+import { OrdenesComponent } from './mesas/ordenes/ordenes.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,12 @@ import { InventarioPage } from './pages/inventario/inventario';
     ErrorPage,
     MenuPage,
     ProveedoresComponent,
-    InventarioPage
+    InventarioPage,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    GestionComponent,
+    OrdenesComponent
   ],
   imports: [
     AppRoutingModule,
