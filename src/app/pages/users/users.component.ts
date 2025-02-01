@@ -19,14 +19,6 @@ export class UsersComponent implements OnInit {
       Role: 'Administrador'
     },
     {
-      name: 'Goku',
-      description: 'Proveedor de ingredientes y herramientas de cocina.',
-      profileImage: '../../.f./assets/img/theme/goku.png',
-      hoverImage: '../../../assets/img/theme/goku2.png',
-      showFullDescription: false,
-      Role: 'Cocina'
-    },
-    {
       name: 'Gohan',
       description: 'Proveedor de productos para el área de servicio.',
       profileImage: '../../../assets/img/theme/gohan.png',
