@@ -48,11 +48,8 @@ body {
 
 /* Estilos para los detalles de la orden */
 .detalles {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px;
-    flex-wrap: wrap; /* Asegura que los inputs se apilen en pantallas pequeñas */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;/* Asegura que los inputs se apilen en pantallas pequeñas */
 }
 
 .n-orden {
