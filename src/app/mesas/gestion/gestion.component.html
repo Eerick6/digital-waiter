@@ -2,7 +2,6 @@
     <div class="title">
         <h1>Mesa Seleccionada</h1>
         <h3>Añade Productos a tu orden</h3>
-
     </div>
     <div class="btones">
         <div class="btn">Enviar Orden</div>
@@ -26,12 +25,26 @@
 
 <div class="detalle-container">
     <div class="orden">
-
+        <h3>Productos en tu orden</h3>
+        <div *ngFor="let product of pedido" class="producto">
+            <div class="producto-info">
+                <h4>{{ product.name }}</h4>
+                <p>{{ product.description }}</p>
+                <p>Precio: {{ product.price }}</p>
+            </div>
+            <div class="cantidad">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" [(ngModel)]="product.quantity" min="1" value="1">
+            </div>
+        </div>
     </div>
+
     <div class="plato">
         <div class="postres">
-
+            <!-- Aquí puedes agregar más productos específicos de postres si quieres -->
         </div>
-        <div class="entradas"></div>
+        <div class="entradas">
+            <!-- Aquí puedes agregar más productos específicos de entradas si quieres -->
+        </div>
     </div>
 </div>

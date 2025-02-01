@@ -11,11 +11,14 @@ export class GestionComponent {
  pedido = [{
   name: 'Mil Hojas',
   description: 'Postre',
-  price: '1,00'
+  price: '1,00',
+  id: 2240
  },
  {
   name: 'Mil Hojas',
   description: 'Postre',
-  price: '1,00'
- }]
+  price: '1,00',
+  id: 2242
+ },
+]
 }
