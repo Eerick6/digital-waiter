@@ -1,53 +1,51 @@
+/* General Styles */
 .dashboard-card {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-  }
-  
-  .order-card {
+}
+
+.order-card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
     width: 23%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .order-card h6 {
+}
+
+.order-card h6 {
     display: flex;
     justify-content: center;
     margin-top: 0;
     background-color: #001733;
     color: rgb(255, 255, 255);
-    
-  }
+}
 
-  .buttons {
+.buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
-    
-  }
+}
 
-  .buttons  button {
+.buttons button {
     width: 80%;
-  }
+}
 
-  /* Clases dinámicas según el estado */
+/* Status Colors */
 .status-enviado-a-cocina {
-    background-color: #ffda23; /* Color para "ENVIADO A COCINA" */
-  }
-  
-  .status-listo-para-despacho {
-    background-color: #35eeff; /* Color para "LISTO PARA DESPACHO" */
-  }
-  
-  .status-entregado {
-    background-color: #ff6cbfd2; /* Color para "ENTREGADO" */
-  }
+    background-color: #ffda23; 
+}
 
+.status-listo-para-despacho {
+    background-color: #35eeff; 
+}
 
-  /* Estilo básico para los modales */
+.status-entregado {
+    background-color: #ff6cbfd2; 
+}
+
+/* Modal Styles */
 .modal-content {
     padding: 20px;
     border-radius: 8px;
@@ -55,7 +53,6 @@
     background-color: #fff;
 }
 
-/* Cabecera del modal */
 .modal-header {
     background-color: #f8f9fa;
     border-bottom: 1px solid #dee2e6;
@@ -69,30 +66,27 @@
     color: #333;
 }
 
-/* Cuerpo del modal */
 .modal-body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;  /* Espacio entre los elementos */
+    gap: 15px;
 }
 
-/* Etiquetas de los inputs */
 .modal-body label {
     font-weight: bold;
-    margin-bottom: 8px; /* Separación entre la etiqueta y el campo */
+    margin-bottom: 8px;
 }
 
-/* Campos de entrada */
 .modal-body input,
 .modal-body select {
     width: 100%;
     padding: 12px;
-    margin-bottom: 15px; /* Separación entre los campos */
+    margin-bottom: 15px;
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 1rem;
-    box-sizing: border-box; /* Asegura que el padding no afecte al tamaño del campo */
+    box-sizing: border-box;
 }
 
 .modal-body input:focus,
@@ -101,7 +95,6 @@
     outline: none;
 }
 
-/* Pie de modal con botones */
 .modal-footer {
     padding: 15px;
     text-align: right;
@@ -110,23 +103,20 @@
     border-radius: 0 0 8px 8px;
 }
 
-/* Contenedor de los botones */
 .modal-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Separación entre los botones */
+    gap: 15px;
     margin-top: 15px;
 }
 
-/* Estilo para los botones */
 .modal-buttons .btn {
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 4px;
-    box-sizing: border-box; /* Asegura que el padding no afecte al tamaño del botón */
+    box-sizing: border-box;
 }
 
-/* Botones con colores personalizados */
 .modal-buttons .btn-secondary {
     background-color: #6c757d;
     color: white;
@@ -145,24 +135,20 @@
     border: none;
 }
 
-/* Fondo oscuro del modal */
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Estilo para el diálogo del modal */
 .modal-dialog {
     max-width: 500px;
     margin: 50px auto;
 }
 
-/* Desbordamiento de contenido del modal */
 .modal-body {
     max-height: 400px;
     overflow-y: auto;
 }
 
-/* Animación suave de desvanecimiento del modal */
 .modal.fade .modal-dialog {
     transform: translateY(-50px);
     opacity: 0;
@@ -172,4 +158,68 @@
 .modal.fade.show .modal-dialog {
     transform: translateY(0);
     opacity: 1;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablet devices (up to 1024px) */
+@media screen and (max-width: 1024px) {
+    .order-card {
+        width: 48%;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+
+    .modal-dialog {
+        max-width: 400px;
+    }
+}
+
+/* For mobile devices (up to 768px) */
+@media screen and (max-width: 768px) {
+    .dashboard-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .order-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+
+    .modal-dialog {
+        max-width: 100%;
+        margin: 20px;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* For small mobile devices (up to 480px) */
+@media screen and (max-width: 480px) {
+    .order-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .modal-body input,
+    .modal-body select {
+        padding: 10px;
+    }
+
+    .modal-buttons .btn {
+        font-size: 0.9rem;
+    }
 }
