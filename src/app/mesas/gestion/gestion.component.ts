@@ -76,7 +76,7 @@ export class GestionComponent {
   // Método para cerrar el modal de manera segura
   _closeModal(event: MouseEvent) {
     if ((event.target as HTMLElement).classList.contains('modal-overlay')) {
-      this._mostrarModal = false;  // Cierra el modal si se hace clic en el fondo
+      this._mostrarModal = false;  // Cierra el modal si se hace clic en el fondo 
     }
   }
 }
