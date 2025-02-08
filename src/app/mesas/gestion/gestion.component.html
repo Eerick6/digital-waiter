@@ -1,107 +1,102 @@
 <div class="head-mesas">
+    <!-- Título y subtítulo de la sección -->
     <div class="title">
         <h1>Mesa Seleccionada</h1>
         <h3>Añade Productos a tu orden</h3>
     </div>
+
+    <!-- Botones de acción, aquí se controla la visibilidad del modal -->
     <div class="btones">
-        <div class="btn" (click)="mostrarModal = true">Enviar Orden</div>
+        <div class="btn" (click)="_mostrarModal = true">Enviar Orden</div>
     </div>
 </div>
 
 <div class="detalles">
+    <!-- Sección para ingresar detalles de la mesa y el cliente -->
     <div class="n-orden">
         <h4>Número de mesa:</h4>
-        <input type="text" [(ngModel)]="numeroMesa">
+        <input type="text" [(ngModel)]="_numeroMesa">
     </div>
     <div class="n-orden">
         <h4>Cliente:</h4>
-        <input type="text" [(ngModel)]="nombreCliente">
+        <input type="text" [(ngModel)]="_nombreCliente">
     </div>
     <div class="n-orden">
         <h4>Número de orden:</h4>
-        <input type="text" [(ngModel)]="numeroOrden">
+        <input type="text" [(ngModel)]="_numeroOrden">
     </div>
 </div>
 
 <div class="detalle-container">
-    
     <!-- Tabla de productos donde se manejan las cantidades -->
-<table class="tabla-pedido">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of pedido">
-        <td>{{ product.name }}</td>
-        <td>{{ product.price }}</td>
-        <td>
-          <input 
-            type="number" 
-            [(ngModel)]="cantidades[product.id]" 
-            (input)="calcularTotal()" 
-            min="0" 
-            placeholder="0">
-        </td>
-      </tr>
-    </tbody>
-    <h3>Total: ${{ totalFactura.toFixed(2) }}</h3>
-  </table>
-  
-  <!-- Mostrar el total de la factura -->
+    <table class="tabla-pedido">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Recorrer los productos del pedido -->
+            <tr *ngFor="let product of _pedido">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <!-- Campo para ingresar cantidad de cada producto -->
+                    <input 
+                        type="number" 
+                        [(ngModel)]="_cantidades[product.id]" 
+                        (input)="_calcularTotal()" 
+                        min="0" 
+                        placeholder="0">
+                </td>
+            </tr>
+        </tbody>
+        <!-- Mostrar el total calculado de la factura -->
+        <h3>Total: ${{ _totalFactura.toFixed(2) }}</h3>
+    </table>
 
-  
-
-    
-    
-
+    <!-- Mostrar los productos categorizados en Postres y Entradas -->
     <div class="plato">
         <div class="postres">
             <h2>Postres</h2>
 
             <table class="tabla-platos">
-        
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of pedido">
+                    <!-- Recorrer los productos en el pedido -->
+                    <tr *ngFor="let product of _pedido">
                         <td>{{ product.name }}</td>
                         <td>{{product.description}}</td>
                         <td>{{ product.price }}</td>
-                        
                     </tr>
                 </tbody>
             </table>
-
         </div>
-        <div class="entradas">
 
+        <div class="entradas">
             <h2>Entradas</h2>
             <table class="tabla-platos">
-                
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of pedido">
+                    <!-- Recorrer los productos en el pedido -->
+                    <tr *ngFor="let product of _pedido">
                         <td>{{ product.name }}</td>
                         <td>{{product.description}}</td>
                         <td>{{ product.price }}</td>
-                        
                     </tr>
                 </tbody>
             </table>
@@ -109,20 +104,21 @@
     </div>
 </div>
 
-
-<!-- Modal de confirmación -->
-<div class="modal-overlay" *ngIf="mostrarModal" (click)="closeModal($event)">
+<!-- Modal de confirmación, se muestra solo si _mostrarModal es true -->
+<div class="modal-overlay" *ngIf="_mostrarModal" (click)="_closeModal($event)">
     <div class="modal-content">
-      <h2>Confirmar Orden</h2>
-      <div class="modal-info">
-        <p><strong>Número de mesa:</strong> {{ numeroMesa }}</p>
-        <p><strong>Cliente:</strong> {{ nombreCliente }}</p>
-        <p><strong>Número de orden:</strong> {{ numeroOrden }}</p>
-        <p><strong>Total:</strong> ${{ totalFactura.toFixed(2) }}</p>
-      </div>
-      <div class="modal-buttons">
-        <button class="btn cancelar" (click)="mostrarModal = false">Cancelar</button>
-        <button class="btn confirmar" (click)="enviarOrden()">Confirmar</button>
-      </div>
+        <h2>Confirmar Orden</h2>
+        <div class="modal-info">
+            <!-- Mostrar los datos del pedido en el modal -->
+            <p><strong>Número de mesa:</strong> {{ _numeroMesa }}</p>
+            <p><strong>Cliente:</strong> {{ _nombreCliente }}</p>
+            <p><strong>Número de orden:</strong> {{ _numeroOrden }}</p>
+            <p><strong>Total:</strong> ${{ _totalFactura.toFixed(2) }}</p>
+        </div>
+        <div class="modal-buttons">
+            <!-- Botones para cancelar o confirmar el pedido -->
+            <button class="btn cancelar" (click)="_mostrarModal = false">Cancelar</button>
+            <button class="btn confirmar" (click)="_enviarOrden()">Confirmar</button>
+        </div>
     </div>
-  </div>
+</div>
